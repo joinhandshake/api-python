@@ -10,6 +10,18 @@ class Handshake(object):
 	#Variables
 	base_url = "https://handshake-staging.herokuapp.com/api/v1/"
 
+	def __post_function(self, url, data, headers):
+		r = requests.post(url, data=data, headers=headers)
+		return r
+
+	def __delete_function(self, url, data):
+		r = requests.delete(url, data=data, headers=headers)
+		return r
+
+	def __update_function(self, url, data):
+		r = requests.put(url, data=data, headers=headers)
+		return r
+
 	def __communicate(self, url, data, action):
 		'''
 		Takes the ending of the url and the data to be passed to the server
@@ -18,13 +30,16 @@ class Handshake(object):
 		access_url = self.base_url + url
 		headers = {'Authorization': 'Token token="fb0255bd9c1640914181e2a1aff1d42e"', 'content-type': 'application/json'}
 
-		if(action == "create"):
-			r = requests.post(access_url, data=data, headers=headers)
-		elif(action == "delete"):
-			r = requests.delete(access_url, data=data, headers=headers)
-		elif(action == "update"):
-			r = requests.put(access_url, data=data, headers=headers)
-		return r
+		token_dictionary = {
+			'create' : self.__post_function,
+			'delete' : self.__delete_function,
+			'update' : self.__update_function,
+		}
+
+		function_to_call = token_dictionary[action]
+		r = function_to_call(access_url, data, headers)
+
+		return r.text
 
 
 	def data(self, email_address, username, first_name, last_name):
