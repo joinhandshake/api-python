@@ -54,7 +54,7 @@ class Handshake(object):
 		return results
 
 
-	def delete_user(self):
+	def delete_user(self, email, username, first_name, last_name):
 		'''
 		Deletes a specified user
 		URL: users/delete
@@ -62,11 +62,11 @@ class Handshake(object):
 		url = "users/delete"
 		action = "delete"
 		data = self.data(email, username, first_name, last_name)
-		results = self.__communicate(url, {}, action)
+		results = self.__communicate(url, data, action)
 		return results
 
 
-	def update_user(self):
+	def update_user(self, email, username, first_name, last_name):
 		'''
 		Updates a Specified user
 		URL: users/update
@@ -74,6 +74,6 @@ class Handshake(object):
 		url = "users/update"
 		action = "update"
 		data = self.data(email, username, first_name, last_name)
-		results = self.__communicate(url, {}, action)
+		results = self.__communicate(url, data, action)
 		return results
 
