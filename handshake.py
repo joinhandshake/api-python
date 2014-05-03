@@ -7,29 +7,26 @@ import json
 #Potentially api token here
 
 class Handshake(object):
+	'''
+	Initalize the Handshake class with the api key
+	'''
 	#Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
 	token = None
 
-
-#	def __set_api_token(self, token):
-#	 	self.__token = token
-	
-#	def __get_api_token(self, token):
-#	 	return self.__token
-
 	def __init__(self, token):
 		self.token = token
-	
-	#token = property(__set_api_token, __get_api_token)
 
+	
 	def __post_function(self, url, data, headers):
 		r = requests.post(url, data=data, headers=headers)
 		return r
 
+
 	def __delete_function(self, url, data):
 		r = requests.delete(url, data=data, headers=headers)
 		return r
+
 
 	def __update_function(self, url, data):
 		r = requests.put(url, data=data, headers=headers)
