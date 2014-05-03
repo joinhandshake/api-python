@@ -9,6 +9,7 @@ import json
 class Handshake(object):
 	#Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
+	token = None
 
 
 #	def __set_api_token(self, token):
@@ -40,10 +41,9 @@ class Handshake(object):
 		Takes the ending of the url and the data to be passed to the server
 		Appends the function url to the base API url
 		'''
-		base_token = '\'' + 'Token token=' + '\"' + token + '\"' + '\''
+		base_token = '\'' + 'Token token=' + '\"' + self.token + '\"' + '\''
 		access_url = self.__base_url + url
-		print base_token
-		headers = {'Authorization': __base_token, 'content-type': 'application/json'}
+		headers = {'Authorization': base_token, 'content-type': 'application/json'}
 
 		token_dictionary = {
 			'create' : self.__post_function,
