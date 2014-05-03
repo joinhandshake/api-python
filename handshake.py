@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Filename: stryder_users.py
+# Filename: handshake.py
 import requests
 import json
 
@@ -9,6 +9,18 @@ import json
 class Handshake(object):
 	#Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
+
+
+#	def __set_api_token(self, token):
+#	 	self.__token = token
+	
+#	def __get_api_token(self, token):
+#	 	return self.__token
+
+	def __init__(self, token):
+		self.token = token
+	
+	#token = property(__set_api_token, __get_api_token)
 
 	def __post_function(self, url, data, headers):
 		r = requests.post(url, data=data, headers=headers)
@@ -22,13 +34,16 @@ class Handshake(object):
 		r = requests.put(url, data=data, headers=headers)
 		return r
 
+
 	def __communicate(self, url, data, action):
 		'''
 		Takes the ending of the url and the data to be passed to the server
 		Appends the function url to the base API url
 		'''
+		base_token = '\'' + 'Token token=' + '\"' + token + '\"' + '\''
 		access_url = self.__base_url + url
-		headers = {'Authorization': 'Token token="fb0255bd9c1640914181e2a1aff1d42e"', 'content-type': 'application/json'}
+		print base_token
+		headers = {'Authorization': __base_token, 'content-type': 'application/json'}
 
 		token_dictionary = {
 			'create' : self.__post_function,
