@@ -33,7 +33,7 @@ class Handshake(object):
 		return r
 
 
-	def __get_function(self, url, data, headers):
+	def __get_users_function(self, url, data, headers):
 		r = requests.get(url, headers=headers)
 		return r
 
@@ -45,14 +45,13 @@ class Handshake(object):
 		'''
 		base_token = 'Token token=' + '\"' + self.token + '\"'
 		access_url = self.__base_url + url
-		print base_token
 		headers = {'Authorization': base_token, 'content-type': 'application/json'}
 
 		token_dictionary = {
 			'create' : self.__post_function,
 			'delete' : self.__delete_function,
 			'update' : self.__update_function,
-			'get' : self.__get_function,
+			'get_users' : self.__get_users_function,
 		}
 
 		function_to_call = token_dictionary[action]
@@ -81,7 +80,7 @@ class Handshake(object):
 		Gets multiple users by default
 		'''
 		url = "users"
-		action = "get"
+		action = "get_users"
 		data = None
 		results = self.__communicate(url, data, action)
 		return results
