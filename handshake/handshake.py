@@ -32,6 +32,11 @@ class Handshake(object):
 		return r
 
 
+	def __get_report_function(self, url, data, headers):
+		r = requests.get(url, headers=headers)
+		return r
+
+
 	def __get_users_function(self, url, data, headers):
 		r = requests.get(url, headers=headers)
 		return r
@@ -51,6 +56,7 @@ class Handshake(object):
 			'delete' : self.__delete_function,
 			'update' : self.__update_function,
 			'get_users' : self.__get_users_function,
+			'get_report' : self.__get_report_function,
 		}
 
 		function_to_call = token_dictionary[action]
@@ -71,6 +77,17 @@ class Handshake(object):
 				}
 			})
 
+	def get_report(self, id_num):
+		'''
+		Get a reports information
+		URL: reports/{id}
+		id must be a string
+		'''
+		url = "reports/" + id_num
+		action = "get_report"
+		data = None
+		results = self.__communicate(url, data, action)
+		return results
 
 	def get_users(self):
 		'''
