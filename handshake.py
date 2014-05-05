@@ -23,13 +23,18 @@ class Handshake(object):
 		return r
 
 
-	def __delete_function(self, url, data):
+	def __delete_function(self, url, data, headers):
 		r = requests.delete(url, data=data, headers=headers)
 		return r
 
 
-	def __update_function(self, url, data):
+	def __update_function(self, url, data, headers):
 		r = requests.put(url, data=data, headers=headers)
+		return r
+
+
+	def __get_function(self, url, data, headers):
+		r = requests.get(url, headers=headers)
 		return r
 
 
@@ -47,6 +52,7 @@ class Handshake(object):
 			'create' : self.__post_function,
 			'delete' : self.__delete_function,
 			'update' : self.__update_function,
+			'get' : self.__get_function,
 		}
 
 		function_to_call = token_dictionary[action]
@@ -66,6 +72,19 @@ class Handshake(object):
 				'last_name': last_name,
 				}
 			})
+
+
+	def get_users(self):
+		'''
+		Gets a user or multiple users
+		URL: users
+		Gets multiple users by default
+		'''
+		url = "users"
+		action = "get"
+		data = None
+		results = self.__communicate(url, data, action)
+		return results
 
 
 	def create_user(self, email, username, first_name, last_name):
