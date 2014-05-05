@@ -15,6 +15,17 @@ This python wrapper can be used to easily make calls to the Handshake api and pe
 		Add Content
 		Add Content
 
+Installation
+============
+To install the handshake python package please perform the following tasks:
+
+Download the handshake zip or clone this repo from GitHub
+
+You can then continue to running the *setup.py* file
+
+	$ cd ~/path_to_download/handshake
+	$ python setup.py install
+
 Usage
 =====
 
