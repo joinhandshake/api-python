@@ -51,7 +51,6 @@ class Handshake(object):
 
 		function_to_call = token_dictionary[action]
 		r = function_to_call(access_url, data, headers)
-
 		return r.text
 
 
@@ -78,7 +77,6 @@ class Handshake(object):
 		action = "create"
 		data = self.data(email, username, first_name, last_name)
 		results = self.__communicate(url, data, action)
-
 		return results
 
 
