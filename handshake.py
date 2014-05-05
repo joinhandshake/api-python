@@ -3,12 +3,11 @@
 import requests
 import json
 
-#Global Variables
-#Potentially api token here
 
 class Handshake(object):
 	'''
 	Initalize the Handshake class with the api key
+	hs = Handshake("api_key")
 	'''
 	#Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
