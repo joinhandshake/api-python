@@ -1,0 +1,8 @@
+setup.py
+handshake/__init__.py
+handshake/handshake.py
+handshake.egg-info/PKG-INFO
+handshake.egg-info/SOURCES.txt
+handshake.egg-info/dependency_links.txt
+handshake.egg-info/not-zip-safe
+handshake.egg-info/top_level.txt

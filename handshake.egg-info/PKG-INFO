@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: handshake
+Version: 0.1
+Summary: Python wrapper for the Handshake API
+Home-page: https://github.com/strydercorp/api-python
+Author: Philip Middleton
+Author-email: pjmiddle@mtu.edu
+License: BSD
+Description: UNKNOWN
+Platform: UNKNOWN
