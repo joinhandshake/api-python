@@ -28,15 +28,19 @@ After importing the wrapper you need to initialize the Handshake class with your
 
 Performing tasks after this point is as easy knowing what function to call.
 
-Creating Users:
+*Get Users:*
+
+	hs.get_users()
+
+*Creating Users:*
 
 	hs.create_user("user_email", "user_account_name", "First_Name", "Last_Name")
 
-Deleting Users:
+*Deleting Users:*
 	
 	hs.delete_user("user_email", "user_account_name")
 
-Updating Users:
+*Updating Users:*
 
 	hs.update_user("user_email", "user_account_name", "First_Name", "Last_Name")
 

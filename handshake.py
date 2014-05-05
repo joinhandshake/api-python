@@ -3,12 +3,11 @@
 import requests
 import json
 
-#Global Variables
-#Potentially api token here
 
 class Handshake(object):
 	'''
 	Initalize the Handshake class with the api key
+	hs = Handshake("api_key")
 	'''
 	#Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
@@ -23,13 +22,18 @@ class Handshake(object):
 		return r
 
 
-	def __delete_function(self, url, data):
+	def __delete_function(self, url, data, headers):
 		r = requests.delete(url, data=data, headers=headers)
 		return r
 
 
-	def __update_function(self, url, data):
+	def __update_function(self, url, data, headers):
 		r = requests.put(url, data=data, headers=headers)
+		return r
+
+
+	def __get_users_function(self, url, data, headers):
+		r = requests.get(url, headers=headers)
 		return r
 
 
@@ -38,7 +42,7 @@ class Handshake(object):
 		Takes the ending of the url and the data to be passed to the server
 		Appends the function url to the base API url
 		'''
-		base_token = '\'' + 'Token token=' + '\"' + self.token + '\"' + '\''
+		base_token = 'Token token=' + '\"' + self.token + '\"'
 		access_url = self.__base_url + url
 		headers = {'Authorization': base_token, 'content-type': 'application/json'}
 
@@ -46,11 +50,11 @@ class Handshake(object):
 			'create' : self.__post_function,
 			'delete' : self.__delete_function,
 			'update' : self.__update_function,
+			'get_users' : self.__get_users_function,
 		}
 
 		function_to_call = token_dictionary[action]
 		r = function_to_call(access_url, data, headers)
-
 		return r.text
 
 
@@ -68,6 +72,19 @@ class Handshake(object):
 			})
 
 
+	def get_users(self):
+		'''
+		Gets a user or multiple users
+		URL: users
+		Gets multiple users by default
+		'''
+		url = "users"
+		action = "get_users"
+		data = None
+		results = self.__communicate(url, data, action)
+		return results
+
+
 	def create_user(self, email, username, first_name, last_name):
 		'''
 		Creates a user
@@ -77,7 +94,6 @@ class Handshake(object):
 		action = "create"
 		data = self.data(email, username, first_name, last_name)
 		results = self.__communicate(url, data, action)
-
 		return results
 
 
