@@ -38,8 +38,9 @@ class Handshake(object):
 		Takes the ending of the url and the data to be passed to the server
 		Appends the function url to the base API url
 		'''
-		base_token = '\'' + 'Token token=' + '\"' + self.token + '\"' + '\''
+		base_token = 'Token token=' + '\"' + self.token + '\"'
 		access_url = self.__base_url + url
+		print base_token
 		headers = {'Authorization': base_token, 'content-type': 'application/json'}
 
 		token_dictionary = {
