@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # Filename: handshake.py
-import requests
+try:
+    import requests
+except ImportError as e:
+    print("You are missing the python requests package.")
+    raise SystemExit
 import json
 
 
@@ -9,7 +13,7 @@ class Handshake(object):
     	Initalize the Handshake class with the api key
     	hs = Handshake("api_key")
 	'''
-	#Variables
+	# Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
 	token = None
 
@@ -66,7 +70,7 @@ class Handshake(object):
 
 	def data(self, email_address, username, first_name, last_name):
 		'''
-		    Takes in the paramters that get passed to User classes
+		    Takes in the paramters that get passed to User classes and jsonifys them.
 		'''
 		return json.dumps({
 			'user': {
