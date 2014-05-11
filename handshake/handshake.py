@@ -1,15 +1,19 @@
 #!/usr/bin/env python
 # Filename: handshake.py
-import requests
+try:
+    import requests
+except ImportError as e:
+    print("You are missing the python requests package.")
+    raise SystemExit
 import json
 
 
 class Handshake(object):
 	'''
-	Initalize the Handshake class with the api key
-	hs = Handshake("api_key")
+    	Initalize the Handshake class with the api key
+    	hs = Handshake("api_key")
 	'''
-	#Variables
+	# Variables
 	__base_url = "https://handshake-staging.herokuapp.com/api/v1/"
 	token = None
 
@@ -44,8 +48,8 @@ class Handshake(object):
 
 	def __communicate(self, url, data, action):
 		'''
-		Takes the ending of the url and the data to be passed to the server
-		Appends the function url to the base API url
+    		Takes the ending of the url and the data to be passed to the server
+    		Appends the function url to the base API url
 		'''
 		base_token = 'Token token=' + '\"' + self.token + '\"'
 		access_url = self.__base_url + url
@@ -66,7 +70,7 @@ class Handshake(object):
 
 	def data(self, email_address, username, first_name, last_name):
 		'''
-		Takes in the paramters that get passed to User classes
+		    Takes in the paramters that get passed to User classes and jsonifys them.
 		'''
 		return json.dumps({
 			'user': {
@@ -79,9 +83,9 @@ class Handshake(object):
 
 	def get_report(self, id_num):
 		'''
-		Get a reports information
-		URL: reports/{id}
-		id must be a string
+    		Get a reports information
+    		URL: reports/{id}
+    		id must be a string
 		'''
 		url = "reports/" + id_num
 		action = "get_report"
@@ -91,9 +95,9 @@ class Handshake(object):
 
 	def get_users(self):
 		'''
-		Gets a user or multiple users
-		URL: users
-		Gets multiple users by default
+    		Gets a user or multiple users
+    		URL: users
+    		Gets multiple users by default
 		'''
 		url = "users"
 		action = "get_users"
@@ -104,8 +108,8 @@ class Handshake(object):
 
 	def create_user(self, email, username, first_name, last_name):
 		'''
-		Creates a user
-		URL: users
+    		Creates a user
+    		URL: users
 		'''
 		url = "users"
 		action = "create"
@@ -116,8 +120,8 @@ class Handshake(object):
 
 	def delete_user(self, email, username, first_name, last_name):
 		'''
-		Deletes a specified user
-		URL: users/delete
+    		Deletes a specified user
+    		URL: users/delete
 		'''
 		url = "users/delete"
 		action = "delete"
@@ -128,8 +132,8 @@ class Handshake(object):
 
 	def update_user(self, email, username, first_name, last_name):
 		'''
-		Updates a Specified user
-		URL: users/update
+    		Updates a Specified user
+    		URL: users/update
 		'''
 		url = "users/update"
 		action = "update"
